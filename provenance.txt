@@ -1,0 +1,3 @@
+tmax.040842.daily.csv is
+Max Temperature daily data at Brisbane Airport obtained from
+bom.gov.au/climate/data/acorn-sat on Monday 2 March 2020
