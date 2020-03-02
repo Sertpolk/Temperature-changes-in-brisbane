@@ -1,2 +1,4 @@
-# Temperature-changes-in-brisbane
-The temperature changes in brisbane.
+# Temperature Changes In Brisbane
+
+We are investigating the temperature changes in Brisbane over the past years.
+
