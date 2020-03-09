@@ -10,7 +10,7 @@ for title in data.columns.values:
 data = data.dropna()
 
 # create date objects instead of things like 2/03/1999 that look like dates but are actually strings
-dates = pd.to_datetime(data['date'])
+dates = pd.to_datetime(data['date'], dayfirst = True)
 
 # plot data
 plt.title("Brisbane Maximum Daily Temperatures")
@@ -19,5 +19,6 @@ plt.xlabel("Date")
 plt.set_cmap('plasma')
 
 plt.plot(dates, data['maximum temperature (degC)'],',r')
-plt.show()
+#plt.show()
+plt.savefig("raw_maximum_temperature_graph.png")
 
