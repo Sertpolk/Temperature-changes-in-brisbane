@@ -19,5 +19,6 @@ plt.xlabel("Date")
 plt.set_cmap('plasma')
 
 plt.plot(dates, data['maximum temperature (degC)'],',r')
-plt.show()
+#plt.show()
+plt.savefig("raw_maximum_temperature_graph.png")
 
