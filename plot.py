@@ -37,11 +37,11 @@ if plot_line:
 
     y = data['maximum temperature (degC)']
     x = list(range(len(y)))
-    line_fit = np.polyfit(x, y, 1)
+    line_fit = np.polyfit(x, y, 2)
     average_line = np.poly1d(line_fit)
     plt.ylim((22, 28))
 
     plt.plot(dates, data['maximum temperature (degC)'],',r')
     plt.plot(dates, average_line(x), '-k')
-    #plt.show()
-    plt.savefig("raw_maximum_temperature_graph_with_line.png")
+    plt.show()
+    #plt.savefig("raw_maximum_temperature_graph_with_line.png")
