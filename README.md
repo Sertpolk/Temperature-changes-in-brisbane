@@ -16,7 +16,7 @@ This is what our data looks like:
 
 If we fit a straight line to the data we can see if the general trend is increasing or decreasing. 
 The following graph shows that over the past 71 years, the temperature at Brisbane airport has most likely increased.  
-At this stage we cannot really say "it has definitely increased by 0.75" Deg C because there is a lot of scatter in the temperature data.  
+At this stage we cannot really say "it has definitely increased by 0.75 degC" because there is a lot of scatter in the temperature data.  
 But it certainly looks like Brisbane airport has got hotter.
 
 ![Image](raw_maximum_temperature_graph_with_line.png)

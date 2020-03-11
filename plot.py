@@ -53,7 +53,7 @@ if plot_quadratic:
     plt.title("Brisbane Maximum Daily Temperatures")
     plt.ylabel("Maximum Temperature (degC)")
     plt.xlabel("Date")
-    plt.set_cmap('plasma')
+    plt.set_cmap('plasma') 
 
     y = data['maximum temperature (degC)']
     x = list(range(len(y)))
