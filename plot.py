@@ -3,7 +3,8 @@ import numpy as np
 import pandas as pd
 
 plot_raw = False
-plot_line = True
+plot_line = False
+plot_quadratic = True
 
 # read data, remove columns we don't need, and remove any NaNs
 data = pd.read_csv("tmax.040842.daily.csv",delimiter=",")
@@ -45,3 +46,22 @@ if plot_line:
     plt.plot(dates, average_line(x), '-k')
     #plt.show()
     plt.savefig("raw_maximum_temperature_graph_with_line.png")
+
+if plot_quadratic:
+    # plot a quadratic on the data
+    plt.figure(3)
+    plt.title("Brisbane Maximum Daily Temperatures")
+    plt.ylabel("Maximum Temperature (degC)")
+    plt.xlabel("Date")
+    plt.set_cmap('plasma')
+
+    y = data['maximum temperature (degC)']
+    x = list(range(len(y)))
+    line_fit = np.polyfit(x, y, 2)
+    average_line = np.poly1d(line_fit)
+    plt.ylim((22, 28))
+
+    plt.plot(dates, data['maximum temperature (degC)'],',r')
+    plt.plot(dates, average_line(x), '-k')
+    #plt.show()
+    plt.savefig("raw_maximum_temperature_graph_with_quadratic.png")
