@@ -7,6 +7,7 @@ import datetime
 plot_raw = False
 plot_line = False
 plot_quadratic = False
+plot_smoothed = True
 
 # read data, remove columns we don't need, and remove any NaNs
 data = pd.read_csv("tmax.040842.daily.csv",delimiter=",")
@@ -65,8 +66,8 @@ if plot_quadratic:
 
     plt.plot(dates, data['maximum temperature (degC)'],',r')
     plt.plot(dates, average_line(x), '-k')
-    #plt.show()
-    plt.savefig("raw_maximum_temperature_graph_with_quadratic.png")
+    plt.show()
+    # plt.savefig("raw_maximum_temperature_graph_with_quadratic.png")
 
 # function to smooth the temperature data
 def smooth_data(temperatures, window):
@@ -80,5 +81,14 @@ def data_for_year(dates, temperatures, yr):
     end_time = datetime.date(yr + 1, 1, 1)
     return [temperatures[i] for i in range(len(temperatures)) if (dates.iloc[i] >= start_time and dates.iloc[i] < end_time)]
 
-print(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 3), 1957))
-sys.exit(0)
+if plot_smoothed:
+    # plot a quadratic on the data
+    plt.figure(4)
+    plt.title("Brisbane Maximum Daily Temperatures")
+    plt.ylabel("Smoothed Maximum Temperature (degC)")
+    plt.xlabel("Day in year")
+    plt.set_cmap('plasma')
+
+    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 30), 1957))
+    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 30), 2018))
+    plt.show()
