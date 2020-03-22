@@ -40,6 +40,6 @@ Maybe the temperature increase is because:
 
 Or maybe something else!  To explore this idea, we can compare the temperature for two years, say 1950 and 2018.  But when we do this, we see a lot of scatter in the data and it's hard to pick out a pattern.
 
-Therefore, we plot *smoothed* data.  Our strategy is to perform a "running mean".  For instance, the temperature on Wednesday might be the average of the temperature on Monday, Tuesday, Wednesday, Thursday and Friday.   More generally, to get the temperature on a single day, we average over a number of days in its immediate past, and a number of days in its immediate future.  The bigger the "number of days", the smoother the result.
+Therefore, we plot *smoothed* data.  Our strategy is to perform a "running mean".  For instance, we could set "the temperature on Wednesday" to be the average of the measured temperatures on Monday, Tuesday, Wednesday, Thursday and Friday.   More generally, to get the temperature on a single day, we average over a number of days in its immediate past, and a number of days in its immediate future.  The bigger the "number of days", the smoother the result.
 
 The figure below shows various smoothed temperature curves for the year 1950.
