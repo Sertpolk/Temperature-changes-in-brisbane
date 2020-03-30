@@ -82,13 +82,16 @@ def data_for_year(dates, temperatures, yr):
     return [temperatures[i] for i in range(len(temperatures)) if (dates.iloc[i] >= start_time and dates.iloc[i] < end_time)]
 
 if plot_smoothed:
-    # plot a quadratic on the data
+    # plot a smoothed line on the data
     plt.figure(4)
-    plt.title("Brisbane Maximum Daily Temperatures")
+    plt.title("Brisbane Maximum Daily Temperatures (1950)")
     plt.ylabel("Smoothed Maximum Temperature (degC)")
     plt.xlabel("Day in year")
     plt.set_cmap('plasma')
 
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 30), 1957))
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 30), 2018))
+    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 5), 1950), label = '5 day smoothing')
+    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 10), 1950), label = '10 day smoothing')
+    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 20), 1950), label = '20 day smoothing')
+    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 100), 1950), label = '100 day smoothing')
+    plt.legend()
     plt.show()
