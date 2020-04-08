@@ -45,3 +45,7 @@ Therefore, we plot *smoothed* data.  Our strategy is to perform a "running mean"
 The figure below shows various smoothed temperature curves for the year 1950.
 
 ![Image](raw_maximum_temperature_graph_with_smoothed_1950_data.png)
+
+If we plot the running mean for 1950 and 2018, we can see the smoothed data.
+
+![Image](raw_maximum_temperature_smoothed_graph_1950_and_2018.png)

@@ -7,7 +7,8 @@ import datetime
 plot_raw = False
 plot_line = False
 plot_quadratic = False
-plot_smoothed = True
+plot_smoothed = False
+plot_1950_2018_smoothed = True
 
 # read data, remove columns we don't need, and remove any NaNs
 data = pd.read_csv("tmax.040842.daily.csv",delimiter=",")
@@ -95,3 +96,18 @@ if plot_smoothed:
     plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 100), 1950), label = '100 day smoothing')
     plt.legend()
     plt.show()
+
+if plot_1950_2018_smoothed:
+    # plot a smoothed line on the data
+    plt.figure(4)
+    plt.title("Brisbane Maximum Daily Temperatures (1950 & 2018)")
+    plt.ylabel("Smoothed Maximum Temperature (degC)")
+    plt.xlabel("Day in year")
+    plt.set_cmap('plasma')
+
+    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 20), 1950), label = '20 day smoothing 1950')
+    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 20), 2018), label = '20 day smoothing 2018')
+
+    plt.legend()
+    plt.show()
+    # plt.savefig("raw_maximum_temperature_smoothed_graph_1950_and_2018.png")
