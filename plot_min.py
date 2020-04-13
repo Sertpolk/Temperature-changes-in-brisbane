@@ -11,12 +11,12 @@ plot_line = False
 plot_quadratic = False
 plot_smoothed = False
 plot_1950_2018_smoothed = False
-angry = True
+angry = False
 
 # read data, remove columns we don't need, and remove any NaNs
-data = pd.read_csv("tmax.040842.daily.csv",delimiter=",")
+data = pd.read_csv("tmin.040842.daily.csv",delimiter=",")
 for title in data.columns.values:
-    if not (title == "date" or title == "maximum temperature (degC)"):
+    if not (title == "date" or title == "minimum temperature (degC)"):
         data = data.drop(title, 1)
 data = data.dropna()
 
@@ -26,52 +26,52 @@ dates = pd.to_datetime(data['date'], dayfirst = True)
 if plot_raw:
     # plot data
     plt.figure(1)
-    plt.title("Brisbane Maximum Daily Temperatures")
-    plt.ylabel("Maximum Temperature (degC)")
+    plt.title("Brisbane Minimum Daily Temperatures")
+    plt.ylabel("Minimum Temperature (degC)")
     plt.xlabel("Date")
     plt.set_cmap('plasma')
 
-    plt.plot(dates, data['maximum temperature (degC)'],',r')
-    #plt.show()
-    plt.savefig("raw_maximum_temperature_graph.png")
+    plt.plot(dates, data['minimum temperature (degC)'],',b')
+    plt.show()
+    # plt.savefig("raw_minimum_temperature_graph.png")
 
 if plot_line:
     # plot a line on the data
     plt.figure(2)
-    plt.title("Brisbane Maximum Daily Temperatures")
-    plt.ylabel("Maximum Temperature (degC)")
+    plt.title("Brisbane Minimum Daily Temperatures")
+    plt.ylabel("Minimum Temperature (degC)")
     plt.xlabel("Date")
     plt.set_cmap('plasma')
 
-    y = data['maximum temperature (degC)']
+    y = data['minimum temperature (degC)']
     x = list(range(len(y)))
     line_fit = np.polyfit(x, y, 1)
     average_line = np.poly1d(line_fit)
-    plt.ylim((22, 28))
+    plt.ylim((11, 19))
 
-    plt.plot(dates, data['maximum temperature (degC)'],',r')
+    plt.plot(dates, data['minimum temperature (degC)'],',b')
     plt.plot(dates, average_line(x), '-k')
-    #plt.show()
-    plt.savefig("raw_maximum_temperature_graph_with_line.png")
+    plt.show()
+    # plt.savefig("raw_minimum_temperature_graph_with_line.png")
 
 if plot_quadratic:
     # plot a quadratic on the data
     plt.figure(3)
-    plt.title("Brisbane Maximum Daily Temperatures")
-    plt.ylabel("Maximum Temperature (degC)")
+    plt.title("Brisbane Minimum Daily Temperatures")
+    plt.ylabel("Minimum Temperature (degC)")
     plt.xlabel("Date")
     plt.set_cmap('plasma') 
 
-    y = data['maximum temperature (degC)']
+    y = data['minimum temperature (degC)']
     x = list(range(len(y)))
     line_fit = np.polyfit(x, y, 2)
     average_line = np.poly1d(line_fit)
-    plt.ylim((22, 28))
+    plt.ylim((11, 19))
 
-    plt.plot(dates, data['maximum temperature (degC)'],',r')
+    plt.plot(dates, data['minimum temperature (degC)'],',b')
     plt.plot(dates, average_line(x), '-k')
     plt.show()
-    # plt.savefig("raw_maximum_temperature_graph_with_quadratic.png")
+    # plt.savefig("raw_minimum_temperature_graph_with_quadratic.png")
 
 # function to smooth the temperature data
 def smooth_data(temperatures, window):
@@ -88,50 +88,36 @@ def data_for_year(dates, temperatures, yr):
 if plot_smoothed:
     # plot a smoothed line on the data
     plt.figure(4)
-    plt.title("Brisbane Maximum Daily Temperatures (1950)")
-    plt.ylabel("Smoothed Maximum Temperature (degC)")
+    plt.title("Brisbane Minimum Daily Temperatures (1950)")
+    plt.ylabel("Smoothed Minimum Temperature (degC)")
     plt.xlabel("Day in year")
     plt.set_cmap('plasma')
 
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 5), 1950), label = '5 day smoothing')
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 10), 1950), label = '10 day smoothing')
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 20), 1950), label = '20 day smoothing')
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 100), 1950), label = '100 day smoothing')
+    plt.plot(data_for_year(dates, smooth_data(data['minimum temperature (degC)'], 5), 1950), label = '5 day smoothing')
+    plt.plot(data_for_year(dates, smooth_data(data['minimum temperature (degC)'], 10), 1950), label = '10 day smoothing')
+    plt.plot(data_for_year(dates, smooth_data(data['minimum temperature (degC)'], 20), 1950), label = '20 day smoothing')
+    plt.plot(data_for_year(dates, smooth_data(data['minimum temperature (degC)'], 100), 1950), label = '100 day smoothing')
     plt.legend()
     plt.show()
+    # plt.savefig("raw_minimum_temperature_graph_with_smoothed_1950_data.png")
 
 if plot_1950_2018_smoothed:
     # plot a smoothed line on the data
     plt.figure(4)
-    plt.title("Brisbane Maximum Daily Temperatures (1950 & 2018)")
-    plt.ylabel("Smoothed Maximum Temperature (degC)")
+    plt.title("Brisbane Minimum Daily Temperatures (1950 & 2018)")
+    plt.ylabel("Smoothed Minimum Temperature (degC)")
     plt.xlabel("Day in year")
     plt.set_cmap('plasma')
 
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 20), 1950), label = '20 day smoothing 1950')
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 20), 2018), label = '20 day smoothing 2018')
+    plt.plot(data_for_year(dates, smooth_data(data['minimum temperature (degC)'], 20), 1950), label = '20 day smoothing 1950')
+    plt.plot(data_for_year(dates, smooth_data(data['minimum temperature (degC)'], 20), 2018), label = '20 day smoothing 2018')
 
     plt.legend()
     plt.show()
-    # plt.savefig("raw_maximum_temperature_smoothed_graph_1950_and_2018.png")
-
-if plot_smoothed:
-    # plot a smoothed line on the data
-    plt.figure(4)
-    plt.title("Brisbane Maximum Daily Temperatures (1950)")
-    plt.ylabel("Smoothed Maximum Temperature (degC)")
-    plt.xlabel("Day in year")
-    plt.set_cmap('plasma')
-
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 5), 1950), label = '5 day smoothing')
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 10), 1950), label = '10 day smoothing')
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 20), 1950), label = '20 day smoothing')
-    plt.plot(data_for_year(dates, smooth_data(data['maximum temperature (degC)'], 100), 1950), label = '100 day smoothing')
-    plt.legend()
-    plt.show()
+    # plt.savefig("raw_minimum_temperature_smoothed_graph_1950_and_2018.png")
 
 def DecadeData(decade, smoothing):
-    sd = smooth_data(data['maximum temperature (degC)'], smoothing)
+    sd = smooth_data(data['minimum temperature (degC)'], smoothing)
     a1 = ((data_for_year(dates, sd, decade)))
     a2 = ((data_for_year(dates, sd, decade+1)))
     a3 = ((data_for_year(dates, sd, decade+2)))
@@ -171,8 +157,8 @@ if angry:
     
     sys.stdout.write("Plotting decade data\n")
     plt.figure(6)
-    plt.title("Brisbane Maximum Daily Temperatures\nSmoothed and averaged by decade")
-    plt.ylabel("Maximum Temperature (degC)")
+    plt.title("Brisbane Minimum Daily Temperatures\nSmoothed and averaged by decade")
+    plt.ylabel("Minimum Temperature (degC)")
     plt.xlabel("Day in year")
     plt.set_cmap('plasma')
 
@@ -181,5 +167,5 @@ if angry:
         plt.plot(DecadeData(dec, 50), label = str(dec) + "s", color = cpick.to_rgba(dec))
 
     plt.legend()
-    # plt.show()
-    plt.savefig("max_decades.png")
+    plt.show()
+    #plt.savefig("min_decades.png")
