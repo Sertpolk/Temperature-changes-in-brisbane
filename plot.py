@@ -3,13 +3,15 @@ import numpy as np
 import pandas as pd
 import sys
 import datetime
+import matplotlib.colors as mcol
+import matplotlib.cm as cm
 
 plot_raw = False
 plot_line = False
 plot_quadratic = False
 plot_smoothed = False
 plot_1950_2018_smoothed = False
-E = True
+angry = True
 
 # read data, remove columns we don't need, and remove any NaNs
 data = pd.read_csv("tmax.040842.daily.csv",delimiter=",")
@@ -154,20 +156,29 @@ def DecadeData(decade, smoothing):
     return result
 
 
-if E:
+
+if angry:
+    # Color stuff: https://stackoverflow.com/questions/25748183/python-making-color-bar-that-runs-from-red-to-blue
+    # Make a user-defined colormap that will vary from blue to red
+    cm1 = mcol.LinearSegmentedColormap.from_list("MyCmapName",["b", "r"])
+    # Make a normalizer that will map the decade values
+    # [1950, 2011] -> [0,1].
+    cnorm = mcol.Normalize(vmin = 1950, vmax = 2010)
+    # Turn these into an object that can be used to map time values to colors and
+    # can be passed to plt.colorbar().
+    cpick = cm.ScalarMappable(norm = cnorm, cmap = cm1)
+    cpick.set_array([])
+    
+    sys.stdout.write("Plotting decade data\n")
     plt.figure(6)
-    plt.title("Brisbane Maximum Daily Temperatures (1950 & 2018)")
-    plt.ylabel("Smoothed Maximum Temperature (degC)")
+    plt.title("Brisbane Maximum Daily Temperatures\nSmoothed and averaged by decade")
+    plt.ylabel("Maximum Temperature (degC)")
     plt.xlabel("Day in year")
     plt.set_cmap('plasma')
 
-    plt.plot(DecadeData(1950, 30), label = '1950s')
-    plt.plot(DecadeData(1960, 30), label = '1960s')
-    plt.plot(DecadeData(1970, 30), label = '1970s')
-    plt.plot(DecadeData(1980, 30), label = '1980s')
-    plt.plot(DecadeData(1990, 30), label = '1990s')
-    plt.plot(DecadeData(2000, 30), label = '2000s')
-    plt.plot(DecadeData(2010, 30), label = '2010s')
+    for dec in [1950, 1960, 1970, 1980, 1990, 2000, 2010]:
+        sys.stdout.write(str(dec) + "\n")
+        plt.plot(DecadeData(dec, 50), label = str(dec) + "s", color = cpick.to_rgba(dec))
 
     plt.legend()
     plt.show()
