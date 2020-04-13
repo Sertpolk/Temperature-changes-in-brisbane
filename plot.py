@@ -182,3 +182,4 @@ if angry:
 
     plt.legend()
     plt.show()
+    # plt.savefig("raw_maximum_temperature_graph_with_50_day_smoothing_decades.png")
