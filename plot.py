@@ -140,8 +140,8 @@ def DecadeData(decade, smoothing):
     a6 = ((data_for_year(dates, sd, decade+5)))
     a7 = ((data_for_year(dates, sd, decade+6)))
     a8 = ((data_for_year(dates, sd, decade+7)))
+    a9 = ((data_for_year(dates, sd, decade+8)))
     if decade <2008:
-        a9 = ((data_for_year(dates, sd, decade+8)))
         a10 = ((data_for_year(dates, sd, decade+9)))
         m = min([len(a1), len(a2), len(a3), len(a4), len(a5), len(a6), len(a7), len(a8), len(a9), len(a10)])
         result = list(range(m))
@@ -149,10 +149,10 @@ def DecadeData(decade, smoothing):
             result[day] = (a1[day] + a2[day] + a3[day] + a4[day] + a5[day] + a6[day] + a7[day] + a8[day] + a9[day] +
                            a10[day]) / 10.0
     else:
-        m = min([len(a1), len(a2), len(a3), len(a4), len(a5), len(a6), len(a7), len(a8)])
+        m = min([len(a1), len(a2), len(a3), len(a4), len(a5), len(a6), len(a7), len(a8), len(a9)])
         result = list(range(m))
         for day in range(m):
-            result[day] = (a1[day] + a2[day] + a3[day] + a4[day] + a5[day] + a6[day] + a7[day] + a8[day])/ 8.0
+            result[day] = (a1[day] + a2[day] + a3[day] + a4[day] + a5[day] + a6[day] + a7[day] + a8[day] + a9[day])/ 9.0
     return result
 
 

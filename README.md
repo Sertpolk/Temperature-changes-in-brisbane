@@ -46,6 +46,19 @@ The figure below shows various smoothed temperature curves for the year 1950.
 
 ![Image](raw_maximum_temperature_graph_with_smoothed_1950_data.png)
 
-If we plot the running mean for 1950 and 2018, we can see the smoothed data.
+If we plot the running mean for 1950 and 2018, we can see the smoothed data.  There is quite a lot of "wigglyness" here, and maybe 1950 and 2018 are "special" for some reason, so instead, let's explore the temperature changes by decade.
 
 ![Image](raw_maximum_temperature_smoothed_graph_1950_and_2018.png)
+
+## Temperatures through the decades
+
+In the graph below, we plot the annual temperatures in each decade.  We do this by:
+
+1. Smoothing the entire data with the "running mean" idea used above.  We use a window of 50 days.
+2. To get the temperature on 1 Jan for the 1950s, we average the temperature on 1 Jan 1950, 1 Jan 1951, 1 Jan 1952, ..., 1 Jan 1959.  To get the temperature on the 2 Jan for the 1950s, we average the temperature on 2 Jan 1950, 2 Jan 1951, ..., 2 Jan 1959.  And so on.
+3. We do this for each decade: 1950s, 1960s, 1970s, ... 2010s.  (There is no data for 2019, so we only use 2010, 2011, 2012, ..., 2019 for the 2010s series.)
+4. We plot the data
+
+It looks like the temperatures have mostly increased in the winter and spring, and there's less obvious change in the summer and autumn.
+
+
