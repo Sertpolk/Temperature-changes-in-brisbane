@@ -61,4 +61,5 @@ In the graph below, we plot the annual temperatures in each decade.  We do this 
 
 It looks like the temperatures have mostly increased in the winter and spring, and there's less obvious change in the summer and autumn.
 
-![Image](raw_maximum_temperature_graph_with_50_day_smoothing_decades)
+![Image](max_decades.png)
+
